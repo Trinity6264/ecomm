@@ -1,5 +1,6 @@
 'use client'
 import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
+import YXEarPhones from '@/components/Home/YXEarPhones';
 import React, { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
 
 // --- Type Definitions ---
@@ -318,7 +319,8 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
         <FeaturedProductB product={productData.find(p => p.id === 4)!} onSeeProduct={handleSeeProduct} />
         <FeaturedProductC product={productData.find(p => p.id === 5)!} onSeeProduct={handleSeeProduct} />
       </section>
-
+      
+      <YXEarPhones />
       <BringingYouTheBestAudio />
     </div>
   );
