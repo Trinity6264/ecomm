@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 
 // Initialize the Manrope font from Google Fonts
 const manrope = Manrope({
-  variable: "--font-manrope", // CSS variable name
-  subsets: ["latin"],        // Character subsets to include
+  variable: "--font-manrope",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -21,10 +21,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Apply the Manrope font variable to the body tag.
-        This makes it the default font for the entire application.
-        The 'antialiased' class smooths out the font.
-      */}
       <body className={`${manrope.variable} antialiased`}>
         {children}
         <Footer />
