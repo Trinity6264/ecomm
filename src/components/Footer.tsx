@@ -1,24 +1,24 @@
 
 const Footer = () => {
   return (
-  <footer className="bg-black text-white">
+    <footer className="bg-[#101010] text-white">
         <div className="container mx-auto px-6 md:px-24 py-12 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-24 h-1 bg-orange-500 w-24"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-24 h-1 bg-[#D87D4A] w-24"></div>
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <h2 className="text-2xl font-bold mb-8 md:mb-0">audiophile</h2>
-            <ul className="flex flex-col md:flex-row items-center gap-8 text-sm uppercase font-bold tracking-widest">
-              <li className="hover:text-orange-500 cursor-pointer transition-colors">HOME</li>
-              <li className="hover:text-orange-500 cursor-pointer transition-colors">HEADPHONES</li>
-              <li className="hover:text-orange-500 cursor-pointer transition-colors">SPEAKERS</li>
-              <li className="hover:text-orange-500 cursor-pointer transition-colors">EARPHONES</li>
+            <ul className="flex flex-col md:flex-row items-center gap-8 text-[13px] text-white uppercase font-bold tracking-widest">
+              <li className="hover:text-[#D87D4A] cursor-pointer transition-colors">HOME</li>
+              <li className="hover:text-[#D87D4A] cursor-pointer transition-colors">HEADPHONES</li>
+              <li className="hover:text-[#D87D4A] cursor-pointer transition-colors">SPEAKERS</li>
+              <li className="hover:text-[#D87D4A] cursor-pointer transition-colors">EARPHONES</li>
             </ul>
           </div>
-          <p className="text-gray-400 opacity-75 md:w-1/2 text-center md:text-left mb-12">
-            Audiophile is an all in one stop to fulfill your audio needs. We&apos;re a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
+        <p className="text-[#FFFFFF] opacity-50 md:w-1/2 font-medium text-[15px] text-center md:text-left mb-12">
+            Audiophile is an all in one stop to fulfill your audio needs. We&apos;re a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we&apos;re open 7 days a week.
           </p>
           <div className="flex md:flex-row flex-col justify-between items-center">
-            <p className="text-gray-400 opacity-75">Copyright 2021. All Rights Reserved</p>
-            <div className="flex gap-4">
+          <p className="text-[#FFFFFF] opacity-50 md:w-1/2 font-medium text-[15px] text-center md:text-left mb-12">Copyright 2021. All Rights Reserved</p>
+            <div className="flex gap-4 p-4">
               <a href="#" aria-label="Facebook page" className="text-white hover:text-orange-500 transition-colors">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325V22.676C0 23.407 0.593 24 1.325 24H12.82V14.706H9.692V11.084H12.82V8.413C12.82 5.313 14.713 3.625 17.479 3.625C18.804 3.625 19.942 3.724 20.274 3.768V7.008L18.356 7.009C16.852 7.009 16.561 7.724 16.561 8.772V11.085H20.142L19.681 14.707H16.561V24H22.675C23.407 24 24 23.407 24 22.675V1.325C24 0.593 23.407 0 22.675 0Z" /></svg>
               </a>
