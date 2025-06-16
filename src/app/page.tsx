@@ -1,4 +1,5 @@
 'use client'
+import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
 import React, { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
 
 // --- Type Definitions ---
@@ -318,7 +319,7 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
         <FeaturedProductC product={productData.find(p => p.id === 5)!} onSeeProduct={handleSeeProduct} />
       </section>
 
-      <AboutSection />
+      <BringingYouTheBestAudio />
     </div>
   );
 }
@@ -421,7 +422,7 @@ const CategoryPage: FC<CategoryPageProps> = ({ setPage, category, setProduct }) 
           ))}
         </div>
         <CategoryLinksSection setPage={setPage} />
-        <AboutSection />
+        <BringingYouTheBestAudio />
       </main>
     </div>
   );
@@ -448,23 +449,6 @@ const ProductListItem: FC<ProductListItemProps> = ({ product, onSeeProduct, reve
   )
 }
 
-const AboutSection: FC = () => {
-  return (
-    <section className="container mx-auto px-6 md:px-24 py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="text-center md:text-left">
-          <h2 className="text-4xl font-bold uppercase">Bringing you the <span className="text-orange-500">best</span> audio gear</h2>
-          <p className="mt-8 text-gray-500 opacity-75">
-            Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.
-          </p>
-        </div>
-        <div className="bg-gray-100 rounded-lg h-80 md:h-full">
-          <Image src="https://placehold.co/540x588/f1f1f1/000?text=Man+With+Headphones" alt="Man wearing headphones" className="w-full h-full object-cover rounded-lg" />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 interface ProductDetailPageProps {
   product: Product;
