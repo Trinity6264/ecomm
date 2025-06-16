@@ -317,10 +317,10 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
       <section className="px-6 md:px-24 container mx-auto pb-20 space-y-8">
         <FeaturedProductA product={productData.find(p => p.id === 3)!} onSeeProduct={handleSeeProduct} />
         <FeaturedProductB product={productData.find(p => p.id === 4)!} onSeeProduct={handleSeeProduct} />
-        <FeaturedProductC product={productData.find(p => p.id === 5)!} onSeeProduct={handleSeeProduct} />
-      </section>
-      
+        {/* <FeaturedProductC product={productData.find(p => p.id === 5)!} onSeeProduct={handleSeeProduct} /> */}
       <YXEarPhones />
+      </section>
+
       <BringingYouTheBestAudio />
     </div>
   );
@@ -386,19 +386,7 @@ const FeaturedProductB: FC<FeaturedProductProps> = ({ product, onSeeProduct }) =
     </div>
   );
 }
-const FeaturedProductC: FC<FeaturedProductProps> = ({ product, onSeeProduct }) => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="bg-gray-200 rounded-lg">
-        <Image src={'https://placehold.co/540x320/f1f1f1/000?text=YX1'} alt={product.name} className="w-full h-full object-cover rounded-lg" />
-      </div>
-      <div className="bg-gray-100 rounded-lg p-8 md:p-24 flex flex-col justify-center">
-        <h2 className="text-3xl font-bold mb-8 uppercase">{product.name}</h2>
-        <button onClick={() => onSeeProduct(product)} className="border border-black bg-transparent text-black uppercase px-8 py-4 hover:bg-black hover:text-white transition-colors self-start">See Product</button>
-      </div>
-    </div>
-  );
-}
+
 
 interface CategoryPageProps {
   setPage: (page: string) => void;
