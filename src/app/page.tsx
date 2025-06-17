@@ -1,5 +1,6 @@
 'use client'
 import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
+import ProductCategoryCard from '@/components/Home/ProductCategoryCard';
 import YXEarPhones from '@/components/Home/YXEarPhones';
 import ZXNineSpeaker from '@/components/Home/ZXNineSpeaker';
 import ZX7SpeakerShowcase from '@/components/Home/ZXSpeakers';
@@ -327,34 +328,18 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
   );
 }
 
-interface CategoryCardProps {
-  name: string;
-  image: string;
-  onClick: () => void;
-}
-
-const CategoryCard: FC<CategoryCardProps> = ({ name, image, onClick }) => {
-  return (
-    <div className="relative bg-gray-100 rounded-lg pt-24 pb-8 text-center flex flex-col items-center group">
-      <Image src={image} alt={name} className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-auto group-hover:scale-110 transition-transform duration-300" />
-      <h3 className="text-lg font-bold uppercase">{name}</h3>
-      <button onClick={onClick} className="mt-4 text-gray-500 uppercase flex items-center gap-2 group-hover:text-orange-500 transition-colors">
-        Shop <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-      </button>
-    </div>
-  );
-}
 
 interface CategoryLinksSectionProps {
   setPage: (page: string) => void;
 }
+
 const CategoryLinksSection: FC<CategoryLinksSectionProps> = ({ setPage }) => {
   return (
     <section className="py-20 px-6 md:px-24 container mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <CategoryCard name="Headphones" image="https://placehold.co/300x200/f1f1f1/000?text=Headphones" onClick={() => setPage('category-headphones')} />
-        <CategoryCard name="Speakers" image="https://placehold.co/300x200/f1f1f1/000?text=Speakers" onClick={() => setPage('category-speakers')} />
-        <CategoryCard name="Earphones" image="https://placehold.co/300x200/f1f1f1/000?text=Earphones" onClick={() => setPage('category-earphones')} />
+        <ProductCategoryCard name="Headphones" image="/assets/shared/desktop/image-category-thumbnail-headphones.png" onClick={() => setPage('category-headphones')} />
+        <ProductCategoryCard name="Speakers" image="/assets/shared/desktop/image-category-thumbnail-speakers.png" onClick={() => setPage('category-speakers')} />
+        <ProductCategoryCard name="Earphones" image="/assets/shared/desktop/image-category-thumbnail-earphones.png" onClick={() => setPage('category-earphones')} />
       </div>
     </section>
   );
