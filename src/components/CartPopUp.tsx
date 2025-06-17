@@ -1,11 +1,15 @@
 'use client'
 
+interface CartPopUpProps { 
+    onClose: ()=> void,
+}
 
-const CartPopUp = () => {
+const CartPopUp = (props: CartPopUpProps) => {
+    const {onClose} =props
     return (
         <div
             className="fixed inset-0 bg-black z-40 flex justify-center items-start pt-32 md:pt-28"
-            onClick={() => { }} // Close when clicking the backdrop
+            onClick={onClose} // Close when clicking the backdrop
         >
             {/* Modal */}
             <div

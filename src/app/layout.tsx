@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+'use client'
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { Provider } from "react-redux";
+import { store } from '@/store'
 
 // Initialize the Manrope font from Google Fonts
 const manrope = Manrope({
@@ -10,10 +12,7 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Audiophile",
-  description: "Discover the best audio products",
-};
+
 
 export default function RootLayout({
   children,
@@ -23,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <Provider store={store}>
+          <Header />
+          {children}
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
