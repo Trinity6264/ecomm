@@ -1,3 +1,4 @@
+import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio'
 import ProductCategoryCard from '@/components/Home/ProductCategoryCard'
 import NewProductCard from '@/components/NewProductCard'
 import PageTitle from '@/components/PageTitle'
@@ -12,12 +13,14 @@ const page = () => {
         
         <NewProductCard description='Stream high quality sound wirelessly with minimal loss. The ZX7 bookshelf speaker uses high-end audiophile components that represents the top of the line powered speakers for home or studio use.' imagePathLink='/assets/product-zx7-speaker/mobile/image-product.jpg'  subTitle='ZX7 SPEAKER' productPath=''/>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-36">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-36 mb-32">
           <ProductCategoryCard name="Headphones" image="/assets/shared/desktop/image-category-thumbnail-headphones.png" path={'/headphones'} />
           <ProductCategoryCard name="Speakers" image="/assets/shared/desktop/image-category-thumbnail-speakers.png" path={'/speakers'} />
           <ProductCategoryCard name="Earphones" image="/assets/shared/desktop/image-category-thumbnail-earphones.png" path={'/earphones'} />
         </div>
-        
+
+        <BringingYouTheBestAudio />
+
       </div>
     </div>
   )

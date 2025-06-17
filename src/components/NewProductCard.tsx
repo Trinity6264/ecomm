@@ -14,7 +14,7 @@ const NewProductCard = (props: NewProductCardProps) => {
     const router = useRouter();
     const { title, subTitle, description, imagePathLink, productPath } = props;
     return (
-        <div className="flex flex-col items-center justify-center mt-30">
+        <div className="flex flex-col items-center justify-center mt-20">
             <div className='flex flex-col items-center justify-center bg-[#F1F1F1] rounded-[8px] '>
                 <Image src={imagePathLink} alt='Speaker' width={400} height={400} />
             </div>
