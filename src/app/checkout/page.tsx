@@ -4,6 +4,8 @@ import SummaryRow from '@/components/SummaryRow'
 import { useAppSelector } from '@/store/hooks';
 import React, { useState } from 'react'
 import Image from 'next/image';
+import ThankYouPopUp from '@/components/ThankYouPopUp';
+import { useRouter } from 'next/navigation';
 
 export interface FormDataX {
     name: string;
@@ -22,6 +24,7 @@ export interface FormDataX {
 
 const Page = () => {
     const cartItems = useAppSelector((state) => state.cart.items);
+    const route = useRouter();
 
     // const handleSubmit = (e: React.FormEvent) => {
     //     e.preventDefault();
@@ -33,7 +36,7 @@ const Page = () => {
 
     const [formData, setFormData] = useState<FormDataX>({ name: '', email: '', phone: '', address: '', zip: '', city: '', country: '', paymentMethod: 'e-money', eMoneyNumber: '', eMoneyPin: '' });
     const [errors, setErrors] = useState<Record<string, string>>({});
-    // const [isOrderConfirmed, setIsOrderConfirmed] = useState<boolean>(false);
+    const [isOrderConfirmed, setIsOrderConfirmed] = useState<boolean>(false);
 
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const shipping = 50;
@@ -60,6 +63,8 @@ const Page = () => {
     };
     return (
         <div className="bg-[#FFF]">
+            {isOrderConfirmed && <ThankYouPopUp />}
+
             <div className="px-6 md:px-24 py-16 container mx-auto bg-[#FAFAFA]">
                 <button onClick={() => { }} className="text-gray-500 mb-8 hover:text-[#D87D4A]">Go Back</button>
                 <form onSubmit={() => { }} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -105,7 +110,10 @@ const Page = () => {
                             <SummaryRow label="VAT (20%)" value={vat} />
                             <SummaryRow label="Grand Total" value={grandTotal} isGrandTotal={true} />
                         </div>
-                        <button type="submit" className="w-full bg-[#D87D4A] text-white uppercase cursor-pointer py-3 mt-6 hover:bg-orange-400 transition-colors">Continue & Pay</button>
+                        <button onClick={(e) => {
+                            e.defaultPrevented();
+                            setIsOrderConfirmed(true)
+                        }} type="submit" className="w-full bg-[#D87D4A] text-white uppercase cursor-pointer py-3 mt-6 hover:bg-orange-400 transition-colors">Continue & Pay</button>
                     </div>
                 </form>
             </div>
