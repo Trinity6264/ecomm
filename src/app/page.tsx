@@ -317,7 +317,6 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
       <CategoryLinksSection setPage={setPage} />
 
       <section className="px-6 md:px-24 container mx-auto pb-20 space-y-8">
-        {/* <FeaturedProductA product={productData.find(p => p.id === 3)!} onSeeProduct={handleSeeProduct} /> */}
         <ZXNineSpeaker />
         <ZX7SpeakerShowcase />
         <YXEarPhones />
