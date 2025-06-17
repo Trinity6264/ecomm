@@ -699,7 +699,7 @@ const AppContent: FC<AppContentProps> = ({ page, setPage, product, setProduct })
   };
 
   return (
-    <div className="font-sans antialiased text-gray-800 bg-white">
+    <div className="font-sans antialiased text-gray-800 bg-[#FAFAFA]">
       <Header setPage={setPage} />
       <main>
         {renderPage()}
