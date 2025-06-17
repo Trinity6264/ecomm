@@ -1,5 +1,6 @@
 'use client'
 import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
+import Landing from '@/components/Home/Landing';
 import ProductCategoryCard from '@/components/Home/ProductCategoryCard';
 import YXEarPhones from '@/components/Home/YXEarPhones';
 import ZXNineSpeaker from '@/components/Home/ZXNineSpeaker';
@@ -292,28 +293,13 @@ interface HomePageProps {
   setProduct: (product: Product) => void;
 }
 
-const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
+const HomePage: FC<HomePageProps> = ({ setPage}) => {
   const heroProduct = productData.find(p => p.id === 1);
   if (!heroProduct) return null;
 
-  const handleSeeProduct = (product: Product) => {
-    setProduct(product);
-    setPage('product-detail');
-  }
-
   return (
     <div>
-      <section className="bg-black text-white text-center md:text-left relative">
-        <div className="container mx-auto flex items-center h-[calc(100vh-90px)] max-h-[729px]">
-          <div className="max-w-md px-6 z-10">
-            <p className="text-gray-400 uppercase tracking-[.5em]">New Product</p>
-            <h2 className="text-4xl md:text-6xl font-bold my-6 uppercase">{heroProduct.name}</h2>
-            <p className="text-gray-300 mb-10 opacity-75">{heroProduct.description}</p>
-            <button onClick={() => handleSeeProduct(heroProduct)} className="bg-orange-500 text-white uppercase px-8 py-4 hover:bg-orange-400 transition-colors">See Product</button>
-          </div>
-        </div>
-        <Image src={'https://placehold.co/1440x729/191919/fff?text=Hero'} alt="headphones" className="absolute top-0 left-0 h-full w-full object-cover opacity-20 md:left-1/2 md:-translate-x-1/2 md:opacity-100" />
-      </section>
+      <Landing/>
 
       <CategoryLinksSection setPage={setPage} />
 
