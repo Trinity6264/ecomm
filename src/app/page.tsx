@@ -1,6 +1,7 @@
 'use client'
 import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
 import YXEarPhones from '@/components/Home/YXEarPhones';
+import ZXNineSpeaker from '@/components/Home/ZXNineSpeaker';
 import ZX7SpeakerShowcase from '@/components/Home/ZXSpeakers';
 import React, { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
 
@@ -316,7 +317,8 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
       <CategoryLinksSection setPage={setPage} />
 
       <section className="px-6 md:px-24 container mx-auto pb-20 space-y-8">
-        <FeaturedProductA product={productData.find(p => p.id === 3)!} onSeeProduct={handleSeeProduct} />
+        {/* <FeaturedProductA product={productData.find(p => p.id === 3)!} onSeeProduct={handleSeeProduct} /> */}
+        <ZXNineSpeaker />
         <ZX7SpeakerShowcase />
         <YXEarPhones />
       </section>
@@ -359,23 +361,6 @@ const CategoryLinksSection: FC<CategoryLinksSectionProps> = ({ setPage }) => {
   );
 }
 
-interface FeaturedProductProps {
-  product: Product;
-  onSeeProduct: (product: Product) => void;
-}
-
-const FeaturedProductA: FC<FeaturedProductProps> = ({ product, onSeeProduct }) => {
-  return (
-    <div className="bg-orange-500 rounded-lg p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 text-white overflow-hidden">
-      <Image src={product.image} alt={product.name} className="md:-mb-12 w-3/4 md:w-auto mx-auto" />
-      <div className="text-center md:text-left">
-        <h2 className="text-4xl md:text-6xl font-bold uppercase">{product.name}</h2>
-        <p className="my-6 opacity-75">{product.description}</p>
-        <button onClick={() => onSeeProduct(product)} className="bg-black text-white uppercase px-8 py-4 hover:bg-gray-700 transition-colors">See Product</button>
-      </div>
-    </div>
-  );
-}
 
 
 interface CategoryPageProps {
