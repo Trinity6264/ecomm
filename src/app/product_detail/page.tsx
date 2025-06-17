@@ -1,4 +1,5 @@
-// 'use client'
+'use client'
+import Button from "@/components/Button"
 import BringingYouTheBestAudio from "@/components/Home/BringingYouTheBestAudio"
 import ProductCategoryCard from "@/components/Home/ProductCategoryCard"
 import InBoxCard from "@/components/InBoxCard"
@@ -7,7 +8,28 @@ import Image from "next/image"
 
 const page = () => {
     return (
-        <div className="container mx-auto px-6 py-12 bg-[#FAFAFA]">
+        <div className="container mx-auto px-6 pb-12  bg-[#FAFAFA]">
+            <p className="text-[#000] opacity-50 py-8 cursor-pointer transition text-[15px] hover:text-[#D87D4A]">Go Back</p>
+            <div className='flex flex-col items-center justify-center bg-[#F1F1F1] rounded-[8px] mb-10'>
+                <Image src={"/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"} alt='Speaker' width={400} height={400} />
+            </div>
+            <p className="text-[#D87D4A] uppercase tracking-[.5em] text-[14px] mb-5">New Product</p>
+            <h2 className="text-[28px] text-[#000] font-bold mb-10">XX99 Mark II Headphones</h2>
+            <p className="text-[15px] text-[#000] opacity-50 font-medium mb-10">
+                The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.
+            </p>
+
+            <div className="mb-10 flex flex-col">
+                <p className="text-[18px] text-[#000] font-bold mb-8">$ 2,999</p>
+                <div className="flex gap-4">
+                    <div className="flex items-center bg-[#F1F1F1]">
+                        <button onClick={() => { }} className="px-4 py-3 text-[#000] text-[13px] opacity-25 cursor-pointer">-</button>
+                        <span className="px-6 py-3 font-bold text-[#000]">{1}</span>
+                        <button onClick={() => { }} className="px-4 py-3 text-[#000] text-[13px] opacity-25 cursor-pointer">+</button>
+                    </div>
+                    <Button label="ADD TO CART" onClick={() => { }} />
+                </div>
+            </div>
 
             <div className="mb-10 flex flex-col">
                 <h2 className="uppercase text-[#000] font-bold text-[24px] mb-4">features</h2>
