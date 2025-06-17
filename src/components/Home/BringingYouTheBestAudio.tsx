@@ -4,7 +4,7 @@ const BringingYouTheBestAudio = () => {
     return (
         <section className="container mx-auto px-6 md:px-24 py-12">
             <div className="flex flex-col gap-12 items-center">
-                <div className="rounded-lg h-80 md:h-full w-full">
+                <div className="rounded-lg md:h-full w-full">
                     <Image src={"/assets/shared/mobile/image-best-gear.jpg"} width={400} height={300} alt="Man wearing headphones" className="w-full h-full object-cover rounded-[8px]" />
                 </div>
                 <div className="text-center md:text-left">

@@ -1,6 +1,7 @@
 'use client'
 import BringingYouTheBestAudio from '@/components/Home/BringingYouTheBestAudio';
 import YXEarPhones from '@/components/Home/YXEarPhones';
+import ZX7SpeakerShowcase from '@/components/Home/ZXSpeakers';
 import React, { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
 
 // --- Type Definitions ---
@@ -316,9 +317,8 @@ const HomePage: FC<HomePageProps> = ({ setPage, setProduct }) => {
 
       <section className="px-6 md:px-24 container mx-auto pb-20 space-y-8">
         <FeaturedProductA product={productData.find(p => p.id === 3)!} onSeeProduct={handleSeeProduct} />
-        <FeaturedProductB product={productData.find(p => p.id === 4)!} onSeeProduct={handleSeeProduct} />
-        {/* <FeaturedProductC product={productData.find(p => p.id === 5)!} onSeeProduct={handleSeeProduct} /> */}
-      <YXEarPhones />
+        <ZX7SpeakerShowcase />
+        <YXEarPhones />
       </section>
 
       <BringingYouTheBestAudio />
@@ -372,16 +372,6 @@ const FeaturedProductA: FC<FeaturedProductProps> = ({ product, onSeeProduct }) =
         <h2 className="text-4xl md:text-6xl font-bold uppercase">{product.name}</h2>
         <p className="my-6 opacity-75">{product.description}</p>
         <button onClick={() => onSeeProduct(product)} className="bg-black text-white uppercase px-8 py-4 hover:bg-gray-700 transition-colors">See Product</button>
-      </div>
-    </div>
-  );
-}
-const FeaturedProductB: FC<FeaturedProductProps> = ({ product, onSeeProduct }) => {
-  return (
-    <div className="relative rounded-lg p-8 md:p-24 flex items-center bg-gray-300 bg-cover bg-center" style={{ backgroundImage: `url('https://placehold.co/1110x320/f1f1f1/000?text=ZX7')` }}>
-      <div className="z-10">
-        <h2 className="text-3xl font-bold mb-8 uppercase">{product.name}</h2>
-        <button onClick={() => onSeeProduct(product)} className="border border-black bg-transparent text-black uppercase px-8 py-4 hover:bg-black hover:text-white transition-colors">See Product</button>
       </div>
     </div>
   );
