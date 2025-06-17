@@ -5,7 +5,7 @@ import ProductCategoryCard from '@/components/Home/ProductCategoryCard';
 import YXEarPhones from '@/components/Home/YXEarPhones';
 import ZXNineSpeaker from '@/components/Home/ZXNineSpeaker';
 import ZX7SpeakerShowcase from '@/components/Home/ZXSpeakers';
-import React, { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
+import { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react';
 
 // --- Type Definitions ---
 interface Product {
@@ -31,10 +31,6 @@ interface CartContextType {
   clearCart: () => void;
 }
 
-interface Recommendation {
-  productName: string;
-  reason: string;
-}
 
 interface FormData {
   name: string;
@@ -141,165 +137,165 @@ const Image: FC<ImageProps> = ({ src, alt, className }) => {
   return <img src={src} alt={alt} className={className} />;
 }
 
-interface HeaderProps {
-  setPage: (page: string) => void;
-}
+// interface HeaderProps {
+//   setPage: (page: string) => void;
+// }
 
-const Header: FC<HeaderProps> = ({ setPage }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const { cart } = useCart();
+// const Header: FC<HeaderProps> = ({ setPage }) => {
+//   const [isCartOpen, setIsCartOpen] = useState(false);
+//   const { cart } = useCart();
 
-  return (
-    <header className="bg-black text-white sticky top-0 z-50">
-      <div className="container mx-auto p-6 flex justify-between items-center border-b border-gray-700">
-        <h1 className="text-2xl font-bold cursor-pointer" onClick={() => setPage('home')}>audiophile</h1>
-        <nav className="hidden md:flex gap-8">
-          <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('home')}>HOME</span>
-          <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-headphones')}>HEADPHONES</span>
-          <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-speakers')}>SPEAKERS</span>
-          <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-earphones')}>EARPHONES</span>
-        </nav>
-        <div className="relative">
-          <svg onClick={() => setIsCartOpen(!isCartOpen)} className="w-6 h-6 cursor-pointer hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-          {cart.length > 0 && <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>}
-          {isCartOpen && <CartModal setPage={setPage} setIsCartOpen={setIsCartOpen} />}
-        </div>
-      </div>
-    </header>
-  );
-}
+//   return (
+//     <header className="bg-black text-white sticky top-0 z-50">
+//       <div className="container mx-auto p-6 flex justify-between items-center border-b border-gray-700">
+//         <h1 className="text-2xl font-bold cursor-pointer" onClick={() => setPage('home')}>audiophile</h1>
+//         <nav className="hidden md:flex gap-8">
+//           <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('home')}>HOME</span>
+//           <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-headphones')}>HEADPHONES</span>
+//           <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-speakers')}>SPEAKERS</span>
+//           <span className="cursor-pointer hover:text-orange-500 transition-colors text-sm uppercase font-bold tracking-widest" onClick={() => setPage('category-earphones')}>EARPHONES</span>
+//         </nav>
+//         <div className="relative">
+//           <svg onClick={() => setIsCartOpen(!isCartOpen)} className="w-6 h-6 cursor-pointer hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+//           {cart.length > 0 && <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>}
+//           {isCartOpen && <CartModal setPage={setPage} setIsCartOpen={setIsCartOpen} />}
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
 
-interface CartModalProps {
-  setPage: (page: string) => void;
-  setIsCartOpen: (isOpen: boolean) => void;
-}
+// interface CartModalProps {
+//   setPage: (page: string) => void;
+//   setIsCartOpen: (isOpen: boolean) => void;
+// }
 
-const CartModal: FC<CartModalProps> = ({ setPage, setIsCartOpen }) => {
-  const { cart, updateQuantity, clearCart } = useCart();
-  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [isLoadingRecs, setIsLoadingRecs] = useState<boolean>(false);
-  const [recsError, setRecsError] = useState<string>('');
+// const CartModal: FC<CartModalProps> = ({ setPage, setIsCartOpen }) => {
+//   const { cart, updateQuantity, clearCart } = useCart();
+//   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+//   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+//   const [isLoadingRecs, setIsLoadingRecs] = useState<boolean>(false);
+//   const [recsError, setRecsError] = useState<string>('');
 
-  const handleCheckout = () => {
-    setIsCartOpen(false);
-    setPage('checkout');
-  };
+//   const handleCheckout = () => {
+//     setIsCartOpen(false);
+//     setPage('checkout');
+//   };
 
-  const getRecommendations = async () => {
-    setIsLoadingRecs(true);
-    setRecsError('');
-    setRecommendations([]);
+//   const getRecommendations = async () => {
+//     setIsLoadingRecs(true);
+//     setRecsError('');
+//     setRecommendations([]);
 
-    const cartItems = cart.map(item => item.name).join(', ');
-    const allProductNames = productData.map(p => p.name).join(', ');
-    const prompt = `A customer has the following items in their shopping cart: ${cartItems}. Based on this, analyze their potential interests (e.g., portable audio, home theater, high-fidelity sound). Then, from the full product list of [${allProductNames}], recommend exactly 2 other products that would complement their current selection. Do not recommend items already in their cart. For each recommendation, provide a short, compelling reason (one sentence) why it's a good fit.`;
-    const payload = {
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: "OBJECT",
-          properties: { recommendations: { type: "ARRAY", items: { type: "OBJECT", properties: { productName: { type: "STRING" }, reason: { type: "STRING" } } } } }
-        }
-      }
-    };
+//     const cartItems = cart.map(item => item.name).join(', ');
+//     const allProductNames = productData.map(p => p.name).join(', ');
+//     const prompt = `A customer has the following items in their shopping cart: ${cartItems}. Based on this, analyze their potential interests (e.g., portable audio, home theater, high-fidelity sound). Then, from the full product list of [${allProductNames}], recommend exactly 2 other products that would complement their current selection. Do not recommend items already in their cart. For each recommendation, provide a short, compelling reason (one sentence) why it's a good fit.`;
+//     const payload = {
+//       contents: [{ role: "user", parts: [{ text: prompt }] }],
+//       generationConfig: {
+//         responseMimeType: "application/json",
+//         responseSchema: {
+//           type: "OBJECT",
+//           properties: { recommendations: { type: "ARRAY", items: { type: "OBJECT", properties: { productName: { type: "STRING" }, reason: { type: "STRING" } } } } }
+//         }
+//       }
+//     };
 
-    const apiKey = "";
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+//     const apiKey = "";
+//     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-    try {
-      const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
-      const result = await response.json();
+//     try {
+//       const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+//       if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+//       const result = await response.json();
 
-      if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
-        const parsedJson = JSON.parse(result.candidates[0].content.parts[0].text);
-        setRecommendations(parsedJson.recommendations || []);
-      } else {
-        throw new Error("Unexpected API response structure.");
-      }
-    } catch (error) {
-      console.error("Gemini API error:", error);
-      setRecsError("Sorry, we couldn't get recommendations right now.");
-    } finally {
-      setIsLoadingRecs(false);
-    }
-  };
+//       if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
+//         const parsedJson = JSON.parse(result.candidates[0].content.parts[0].text);
+//         setRecommendations(parsedJson.recommendations || []);
+//       } else {
+//         throw new Error("Unexpected API response structure.");
+//       }
+//     } catch (error) {
+//       console.error("Gemini API error:", error);
+//       setRecsError("Sorry, we couldn't get recommendations right now.");
+//     } finally {
+//       setIsLoadingRecs(false);
+//     }
+//   };
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex justify-center items-start pt-24" onClick={() => setIsCartOpen(false)}>
-      <div className="bg-white text-black rounded-lg p-8 w-11/12 md:w-1/3 max-w-md" onClick={(e) => e.stopPropagation()}>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-bold tracking-wider">CART ({cart.reduce((acc, item) => acc + item.quantity, 0)})</h2>
-          <button onClick={clearCart} className="underline text-gray-500 hover:text-orange-500 transition-colors">Remove all</button>
-        </div>
-        {cart.length === 0 ? (
-          <p className="text-center py-12">Your cart is empty.</p>
-        ) : (
-          <>
-            <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
-              {cart.map(item => (
-                <div key={item.id} className="flex justify-between items-center">
-                  <Image src={item.image} alt={item.name} className="w-16 h-16 rounded-lg" />
-                  <div className="flex-grow px-4">
-                    <p className="font-bold">{item.shortName}</p>
-                    <p className="text-gray-500">${item.price.toLocaleString()}</p>
-                  </div>
-                  <div className="flex items-center bg-gray-100">
-                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1 hover:bg-gray-200 transition-colors">-</button>
-                    <span className="px-3 font-bold">{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1 hover:bg-gray-200 transition-colors">+</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 border-t pt-6">
-              <button onClick={getRecommendations} disabled={isLoadingRecs} className="w-full bg-indigo-500 text-white uppercase py-3 mt-2 hover:bg-indigo-400 transition-colors disabled:bg-gray-400 flex items-center justify-center gap-2">
-                {isLoadingRecs ? 'Thinking...' : '✨ Get AI Recommendations'}
-              </button>
-              {isLoadingRecs && <p className="text-center mt-4">Finding perfect matches for you...</p>}
-              {recsError && <p className="text-red-500 text-center mt-4">{recsError}</p>}
-              {recommendations.length > 0 && (
-                <div className="mt-4 space-y-3">
-                  <h4 className="font-bold text-center">You might also like...</h4>
-                  {recommendations.map((rec, index) => {
-                    const product = productData.find(p => p.name === rec.productName);
-                    if (!product) return null;
-                    return (
-                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
-                        <p className="font-bold">{rec.productName}</p>
-                        <p className="text-sm text-gray-600 italic">&quot;{rec.reason}&quot;</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-            <div className="flex justify-between items-center mt-6 border-t pt-6">
-              <p className="text-gray-500 uppercase">Total</p>
-              <p className="text-lg font-bold">${subtotal.toLocaleString()}</p>
-            </div>
-            <button onClick={handleCheckout} disabled={cart.length === 0} className="w-full bg-orange-500 text-white uppercase py-3 mt-6 hover:bg-orange-400 transition-colors disabled:bg-gray-300">Checkout</button>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex justify-center items-start pt-24" onClick={() => setIsCartOpen(false)}>
+//       <div className="bg-white text-black rounded-lg p-8 w-11/12 md:w-1/3 max-w-md" onClick={(e) => e.stopPropagation()}>
+//         <div className="flex justify-between items-center mb-6">
+//           <h2 className="text-lg font-bold tracking-wider">CART ({cart.reduce((acc, item) => acc + item.quantity, 0)})</h2>
+//           <button onClick={clearCart} className="underline text-gray-500 hover:text-orange-500 transition-colors">Remove all</button>
+//         </div>
+//         {cart.length === 0 ? (
+//           <p className="text-center py-12">Your cart is empty.</p>
+//         ) : (
+//           <>
+//             <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
+//               {cart.map(item => (
+//                 <div key={item.id} className="flex justify-between items-center">
+//                   <Image src={item.image} alt={item.name} className="w-16 h-16 rounded-lg" />
+//                   <div className="flex-grow px-4">
+//                     <p className="font-bold">{item.shortName}</p>
+//                     <p className="text-gray-500">${item.price.toLocaleString()}</p>
+//                   </div>
+//                   <div className="flex items-center bg-gray-100">
+//                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1 hover:bg-gray-200 transition-colors">-</button>
+//                     <span className="px-3 font-bold">{item.quantity}</span>
+//                     <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1 hover:bg-gray-200 transition-colors">+</button>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//             <div className="mt-6 border-t pt-6">
+//               <button onClick={getRecommendations} disabled={isLoadingRecs} className="w-full bg-indigo-500 text-white uppercase py-3 mt-2 hover:bg-indigo-400 transition-colors disabled:bg-gray-400 flex items-center justify-center gap-2">
+//                 {isLoadingRecs ? 'Thinking...' : '✨ Get AI Recommendations'}
+//               </button>
+//               {isLoadingRecs && <p className="text-center mt-4">Finding perfect matches for you...</p>}
+//               {recsError && <p className="text-red-500 text-center mt-4">{recsError}</p>}
+//               {recommendations.length > 0 && (
+//                 <div className="mt-4 space-y-3">
+//                   <h4 className="font-bold text-center">You might also like...</h4>
+//                   {recommendations.map((rec, index) => {
+//                     const product = productData.find(p => p.name === rec.productName);
+//                     if (!product) return null;
+//                     return (
+//                       <div key={index} className="bg-gray-50 p-3 rounded-lg">
+//                         <p className="font-bold">{rec.productName}</p>
+//                         <p className="text-sm text-gray-600 italic">&quot;{rec.reason}&quot;</p>
+//                       </div>
+//                     );
+//                   })}
+//                 </div>
+//               )}
+//             </div>
+//             <div className="flex justify-between items-center mt-6 border-t pt-6">
+//               <p className="text-gray-500 uppercase">Total</p>
+//               <p className="text-lg font-bold">${subtotal.toLocaleString()}</p>
+//             </div>
+//             <button onClick={handleCheckout} disabled={cart.length === 0} className="w-full bg-orange-500 text-white uppercase py-3 mt-6 hover:bg-orange-400 transition-colors disabled:bg-gray-300">Checkout</button>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
 
 interface HomePageProps {
   setPage: (page: string) => void;
   setProduct: (product: Product) => void;
 }
 
-const HomePage: FC<HomePageProps> = ({ setPage}) => {
+const HomePage: FC<HomePageProps> = ({ setPage }) => {
   const heroProduct = productData.find(p => p.id === 1);
   if (!heroProduct) return null;
 
   return (
     <div>
-      <Landing/>
+      <Landing />
 
       <CategoryLinksSection setPage={setPage} />
 
@@ -319,13 +315,13 @@ interface CategoryLinksSectionProps {
   setPage: (page: string) => void;
 }
 
-const CategoryLinksSection: FC<CategoryLinksSectionProps> = ({ setPage }) => {
+const CategoryLinksSection: FC<CategoryLinksSectionProps> = () => {
   return (
     <section className="py-20 px-6 md:px-24 container mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <ProductCategoryCard name="Headphones" image="/assets/shared/desktop/image-category-thumbnail-headphones.png" onClick={() => setPage('category-headphones')} />
-        <ProductCategoryCard name="Speakers" image="/assets/shared/desktop/image-category-thumbnail-speakers.png" onClick={() => setPage('category-speakers')} />
-        <ProductCategoryCard name="Earphones" image="/assets/shared/desktop/image-category-thumbnail-earphones.png" onClick={() => setPage('category-earphones')} />
+        <ProductCategoryCard name="Headphones" image="/assets/shared/desktop/image-category-thumbnail-headphones.png" path={'/headphones'} />
+        <ProductCategoryCard name="Speakers" image="/assets/shared/desktop/image-category-thumbnail-speakers.png" path={'/speakers'} />
+        <ProductCategoryCard name="Earphones" image="/assets/shared/desktop/image-category-thumbnail-earphones.png" path={'/earphones'} />
       </div>
     </section>
   );
@@ -700,7 +696,7 @@ const AppContent: FC<AppContentProps> = ({ page, setPage, product, setProduct })
 
   return (
     <div className="font-sans antialiased text-gray-800 bg-[#FAFAFA]">
-      <Header setPage={setPage} />
+      
       <main>
         {renderPage()}
       </main>
