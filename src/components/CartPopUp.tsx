@@ -26,7 +26,7 @@ const CartPopUp = (props: CartPopUpProps) => {
                 {/* Header */}
                 {!isCartEmpty && <div className="flex justify-between items-center mb-6">
                     <h2 className="text-lg font-bold uppercase tracking-wider">Cart ({3})</h2>
-                    <button onClick={() => { }} className="text-gray-500 underline hover:text-orange-500 text-sm">
+                    <button onClick={() => { }} className="text-gray-500 underline hover:text-[#D87D4A] text-sm">
                         Remove all
                     </button>
                 </div>
